@@ -53,6 +53,7 @@ public class Stick : VRTK_InteractableObject {
 	}
 
 	public void resetStickCount() {
+		hasFire = false;
 		counter = 0;
 	}
 }
