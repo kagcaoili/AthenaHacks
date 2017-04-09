@@ -9,6 +9,7 @@ public class Stick : VRTK_InteractableObject {
 	bool isUsed = false;
 	int counter = 0;
 	bool hasFire = false;
+	bool startCounting = false;
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +44,9 @@ public class Stick : VRTK_InteractableObject {
 	void OnCollisionEnter(Collision other) {
 		if (IsGrabbed ()) {
 			if (other.gameObject.GetComponent<Stick> () != null) { // is a stick
-				counter++;
+				if (startCounting) {
+					counter++;
+				}
 			}
 		}
 	}
@@ -53,7 +56,10 @@ public class Stick : VRTK_InteractableObject {
 	}
 
 	public void resetStickCount() {
-		hasFire = false;
 		counter = 0;
+	}
+
+	public void setCounting(bool booleanValue) {
+		startCounting = booleanValue;
 	}
 }

@@ -24,8 +24,7 @@ public class Campfire : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.GetComponent<Stick>() != null) {
 			stick = other.gameObject;
-			stick.GetComponent<Stick>().resetStickCount();
-			Debug.Log ("reset stick count, fire = false");
+			stick.GetComponent<Stick> ().setCounting (true);
 			if (stick.GetComponent<Stick>().fireStarted ()) { // if sticks start fire
 				// enable children of this campfire
 				GameObject MyObjName = GameObject.Find("Campfire");
@@ -40,6 +39,7 @@ public class Campfire : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		if (other.gameObject.GetComponent<Stick>() != null) {
 			stick.GetComponent<Stick>().resetStickCount();
+			stick.GetComponent<Stick>().setCounting (false);
 		}
 	}
 
