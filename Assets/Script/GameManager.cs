@@ -7,34 +7,34 @@ public class GameManager : MonoBehaviour {
 
     private EndingManager endgame;
 
-    private int taskCount = 0;
+    public static bool fireOn = false;
+    public static bool waterOn = false;
+
+    public static int taskCount = 0;
+
+    private bool endBegins = false;
 
     [SerializeField]
-    private int MAX_TASKS = 1;
+    private int MAX_TASKS = 2;
 
 	// Use this for initialization
 	void Start () {
         endgame = gameObject.GetComponent<EndingManager>();
         Debug.Log("set endgame");
 
-        endgame.StartEndScene();
+        //endgame.StartEndScene();
 	}
-
-    public void IncrementTaskCount()
-    {
-        if (taskCount < MAX_TASKS)
-        {
-            taskCount++;
-        }
-
-        if (taskCount == MAX_TASKS)
-        {
-            endgame.StartTreeFalling();
-        }
-    }
 	
 	// Update is called once per frame
 	void Update () {
+        if (!endBegins)
+        {
+            if (fireOn && waterOn) 
+            {
+                endBegins = true;
+                endgame.StartTreeFalling();
+            }
+        }
 		
 	}
 }

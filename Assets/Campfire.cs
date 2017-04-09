@@ -31,7 +31,11 @@ public class Campfire : MonoBehaviour {
 				foreach (Transform child in MyObjName.transform)
 				{
 					child.gameObject.SetActive(true);
-				} 
+				}
+
+                //play sound effect here
+                GameManager.fireOn = true;
+                Debug.Log("fire task is now: " + GameManager.fireOn);
 			}
 		}
 	}

@@ -6,20 +6,29 @@ public class EndingManager : MonoBehaviour {
 
     public GameObject bigTree;
     public GameObject deadTree;
+    public GameObject fireworks;
 
 	// Use this for initialization
 	void Start () {
-        
-	}
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Detect trigger enter on the escape: " + other.gameObject.name);
+        if (other.gameObject.transform.root.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player walked through!");
+            StartCoroutine(SpawnFireworks());
+        }
+    }
 
     IEnumerator SpawnFireworks()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
 
-        Debug.Log("StartTree");
+        Debug.Log("END GAME");
         //start fireworks animation
-
-        StartTreeFalling();
+        fireworks.SetActive(true);
 
         yield return new WaitForSeconds(10.0f);
 
@@ -27,16 +36,12 @@ public class EndingManager : MonoBehaviour {
 
     }
 
-    public void StartEndScene()
-    {
-        StartCoroutine(SpawnFireworks());
-    }
-
     public void StartTreeFalling()
     {
         //start tree falling animation
         bigTree.GetComponent<Animation>().Play();
         Debug.Log("playing animation");
+        bigTree.GetComponent<AudioSource>().Play();
     }
 	
 	// Update is called once per frame

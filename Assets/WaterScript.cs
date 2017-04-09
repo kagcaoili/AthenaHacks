@@ -1,31 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VRTK;
 
-public class WaterScript : MonoBehaviour {
+public class WaterScript : VRTK_InteractableObject {
 	
-	public Color blue;
-	MeshRenderer ren;
-	public Texture txtr;
+	//public Color blue;
+	//MeshRenderer ren;
+	//public Texture txtr;
 
 	// Use this for initialization
 	void Start () {
-		ren = GetComponent<MeshRenderer> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
+		//ren = GetComponent<MeshRenderer> ();
 	}
 
-	void OnTriggerExit(Collider other) {
-		Material currmat = ren.material;
-		Material newmat = new Material (currmat);
-		newmat.SetColor ("_Color", blue);
-		ren.material = newmat;
+    public override void StartUsing(GameObject usingObject)
+    {
 
-		ren.material.mainTexture = txtr;
+        base.StartUsing(usingObject);
+    }
 
-		Debug.Log ("that bottle dippity dip");
+    public override void StopUsing(GameObject usingObject)
+    {
+
+        base.StopUsing(usingObject);
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
+    void OnTriggerExit(Collider other) {
+        Debug.Log("Trigger Exit Bottle!");
+        if (IsGrabbed())
+        {
+            Debug.Log("Exit and you are grabbing something!");
+            if (other.gameObject.GetComponent<River>() != null)
+            {
+                Debug.Log("Get compoenent river! its a river!");
+                GameManager.waterOn = true;
+                Debug.Log("the water task is now: " + GameManager.waterOn);
+                Debug.Log("that bottle dippity dip");
+            }
+        
+            
+        }
+		
 	}
 }
