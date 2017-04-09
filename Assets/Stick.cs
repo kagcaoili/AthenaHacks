@@ -8,6 +8,7 @@ public class Stick : VRTK_InteractableObject {
 
 	bool isUsed = false;
 	int counter = 0;
+	bool hasFire = false;
 
 	// Use this for initialization
 	void Start () {
@@ -29,8 +30,9 @@ public class Stick : VRTK_InteractableObject {
 
 	protected override void Update() {
 		base.Update();
-		if (counter >= 6) {
-			Debug.Log ("PLS");
+		if (counter == 3) {
+			Debug.Log ("fire");
+			hasFire = true;
 		}
 	}
 
@@ -44,5 +46,13 @@ public class Stick : VRTK_InteractableObject {
 				counter++;
 			}
 		}
+	}
+
+	public bool fireStarted() {
+		return hasFire;
+	}
+
+	public void resetStickCount() {
+		counter = 0;
 	}
 }

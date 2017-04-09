@@ -8,6 +8,8 @@ public class Campfire : MonoBehaviour {
 
 	bool stickEntered = false;
 	int stickNumber = 0;
+	GameObject stick;
+
 
 	// Use this for initialization
 	void Start () {
@@ -16,22 +18,26 @@ public class Campfire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.GetComponent<Stick>() != null) {
-			stickEntered = true;
-			stickNumber++;
-			Debug.Log("stick entered " + stickNumber);
+			stick = other.gameObject;
+			if (stick.GetComponent<Stick>().fireStarted ()) { // if sticks start fire
+				// enable children of this campfire
+				GameObject MyObjName = GameObject.Find("Campfire");
+				foreach (Transform child in MyObjName.transform)
+				{
+					child.gameObject.SetActive(true);
+				} 
+			}
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		if (other.gameObject.GetComponent<Stick>() != null) {
-			stickEntered = false;
-			stickNumber--;
+			stick.GetComponent<Stick>().resetStickCount();
 		}
 	}
 
