@@ -9,7 +9,7 @@ public class EndingManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(SpawnFireworks());
+        
 	}
 
     IEnumerator SpawnFireworks()
@@ -18,7 +18,7 @@ public class EndingManager : MonoBehaviour {
 
         Debug.Log("StartTree");
         StartTreeFalling();
-        StartFireworks();
+        //start fireworks animation
 
         yield return new WaitForSeconds(10.0f);
 
@@ -26,15 +26,16 @@ public class EndingManager : MonoBehaviour {
 
     }
 
-    public void StartFireworks()
+    public void StartEndScene()
     {
-        //start fireworks animations
+        StartCoroutine(SpawnFireworks());
     }
 
     public void StartTreeFalling()
     {
         //start tree falling animation
         bigTree.GetComponent<Animation>().Play();
+        Debug.Log("playing animation");
     }
 	
 	// Update is called once per frame

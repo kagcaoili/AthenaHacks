@@ -7,13 +7,6 @@ public class GameManager : MonoBehaviour {
 
     private EndingManager endgame;
 
-
-    [SerializeField]
-    private GameObject bigTreeSet;
-
-    [SerializeField]
-    private GameObject deadTreeSet;
-
     private int taskCount = 0;
 
     [SerializeField]
@@ -21,12 +14,10 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        endgame = new EndingManager();
-        endgame.bigTree = bigTreeSet;
+        endgame = gameObject.GetComponent<EndingManager>();
         Debug.Log("set endgame");
-        //endgame.deadTree = deadTreeSet;
 
-        //endgame.StartTreeFalling();
+        endgame.StartEndScene();
 	}
 
     public void IncrementTaskCount()
