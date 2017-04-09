@@ -25,6 +25,7 @@ public class Campfire : MonoBehaviour {
 		if (other.gameObject.GetComponent<Stick>() != null) {
 			stick = other.gameObject;
 			stick.GetComponent<Stick>().resetStickCount();
+			Debug.Log ("reset stick count, fire = false");
 			if (stick.GetComponent<Stick>().fireStarted ()) { // if sticks start fire
 				// enable children of this campfire
 				GameObject MyObjName = GameObject.Find("Campfire");
