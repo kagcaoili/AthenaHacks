@@ -3,12 +3,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Campfire : MonoBehaviour {
 
 	bool stickEntered = false;
 	int stickNumber = 0;
 	GameObject stick;
+
+    public GameObject canvas;
 
 
 	// Use this for initialization
@@ -36,11 +39,37 @@ public class Campfire : MonoBehaviour {
                 //play sound effect here
                 GameManager.fireOn = true;
                 Debug.Log("fire task is now: " + GameManager.fireOn);
+                StartCoroutine(Beginning());
 			}
 		}
 	}
 
-	void OnTriggerExit(Collider other) {
+    IEnumerator Beginning()
+    {
+        Win obj = canvas.GetComponentInChildren<Win>();
+        Text objText = obj.gameObject.GetComponent<Text>();
+
+        if (!GameManager.fireOn && !GameManager.waterOn)
+        {
+            objText.text = "0";
+        }
+        else if (!GameManager.fireOn || !GameManager.waterOn)
+        {
+            objText.text = "1";
+        }
+        else if (GameManager.fireOn && GameManager.waterOn)
+        {
+            objText.text = "2";
+        }
+
+
+        canvas.SetActive(true);
+        yield return new WaitForSeconds(7.0f);
+        canvas.SetActive(false);
+        yield return null;
+    }
+
+    void OnTriggerExit(Collider other) {
 		if (other.gameObject.GetComponent<Stick>() != null) {
 			stick.GetComponent<Stick>().resetStickCount();
 			stick.GetComponent<Stick>().setCounting (false);
