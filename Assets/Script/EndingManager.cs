@@ -17,8 +17,9 @@ public class EndingManager : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
 
         Debug.Log("StartTree");
-        StartTreeFalling();
         //start fireworks animation
+
+        StartTreeFalling();
 
         yield return new WaitForSeconds(10.0f);
 
