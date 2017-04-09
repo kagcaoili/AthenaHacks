@@ -42,6 +42,7 @@ public class Stick : VRTK_InteractableObject {
 			if (other.gameObject.GetComponent<Stick> () != null) { // is a stick
 				if (startCounting) { // only counts when in trigger
 					counter++;
+					Debug.Log ("count: " + counter);
 				}
 			}
 		}
