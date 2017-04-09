@@ -31,10 +31,6 @@ public class Stick : VRTK_InteractableObject {
 
 	protected override void Update() {
 		base.Update();
-		if (counter == 3) {
-			Debug.Log ("fire");
-			hasFire = true;
-		}
 	}
 
 	public bool stickIsHeld() {
@@ -44,7 +40,7 @@ public class Stick : VRTK_InteractableObject {
 	void OnCollisionEnter(Collision other) {
 		if (IsGrabbed ()) {
 			if (other.gameObject.GetComponent<Stick> () != null) { // is a stick
-				if (startCounting) {
+				if (startCounting) { // only counts when in trigger
 					counter++;
 				}
 			}
@@ -52,7 +48,10 @@ public class Stick : VRTK_InteractableObject {
 	}
 
 	public bool fireStarted() {
-		return hasFire;
+		if (counter >= 3) {
+			return true;
+		}
+		return false;
 	}
 
 	public void resetStickCount() {
@@ -61,5 +60,6 @@ public class Stick : VRTK_InteractableObject {
 
 	public void setCounting(bool booleanValue) {
 		startCounting = booleanValue;
+		Debug.Log ("startCounting = " + booleanValue);
 	}
 }

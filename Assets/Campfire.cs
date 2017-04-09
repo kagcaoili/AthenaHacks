@@ -21,10 +21,10 @@ public class Campfire : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.GetComponent<Stick>() != null) {
+	void OnTriggerStay(Collider other) {
+		if (other.gameObject.GetComponent<Stick>() != null) { // if it's a stick
 			stick = other.gameObject;
-			stick.GetComponent<Stick> ().setCounting (true);
+			stick.GetComponent<Stick>().setCounting (true); // stick in fire trigger, start counting
 			if (stick.GetComponent<Stick>().fireStarted ()) { // if sticks start fire
 				// enable children of this campfire
 				GameObject MyObjName = GameObject.Find("Campfire");
