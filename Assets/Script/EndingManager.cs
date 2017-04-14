@@ -7,6 +7,7 @@ public class EndingManager : MonoBehaviour {
     public GameObject bigTree;
     public GameObject deadTree;
     public GameObject fireworks;
+    public GameObject otherSideOfRiver;
 
 	// Use this for initialization
 	void Start () {

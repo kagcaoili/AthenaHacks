@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour {
             if (fireOn && waterOn) 
             {
                 endBegins = true;
+                endgame.otherSideOfRiver.SetActive(true);
                 endgame.StartTreeFalling();
             }
         }
